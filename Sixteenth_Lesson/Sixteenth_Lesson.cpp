@@ -1,6 +1,8 @@
 ﻿#include <iostream>
 #include <string>
 #include <Windows.h>
+#include "Harvest.h"
+#include "Plant.h"
 
 
 class Base 
@@ -107,170 +109,14 @@ class Derived3 : Base3
 	// privateMember недоступен
 };
 
-class Harvest
-{
-private:
-	std::string _harvestName;
-	float _weight;
-	std::string _color;
-
-public:
-	Harvest(const std::string& harvestName, float weight, const std::string& color)
-		: _harvestName(harvestName), _weight(weight), _color(color) {}
-
-	virtual ~Harvest() {}
-
-	std::string GetHarvestName()
-	{
-		return _harvestName;
-	}
-
-	float GetWeight()
-	{
-		return _weight;
-	}
-
-	std::string GetColor()
-	{
-		return _color;
-	}
-
-	virtual void PrintHarvest() = 0;
-
-	
-};
-
-class Plant
-{
-private:
-	std::string _plantName;
-	std::string _size;
-	int _amountHarvest;
-
-public:
-	Plant(const std::string& plantName, const std::string& size, int amountHarvest)
-		: _plantName(plantName), _size(size), _amountHarvest(amountHarvest) {}
-
-	virtual ~Plant() {}
-
-	std::string GetPlantName()
-	{
-		return _plantName;
-	}
-
-	std::string GetSizeOfPlant()
-	{
-		return _size;
-	}
-
-	int& GetAmountOfHarvest()
-	{
-		return _amountHarvest;
-	}
 
 
 
-	virtual void PrintPlant() = 0;
-
-	virtual Harvest* GetHarvest() = 0;
-
-};
-
-class Apple : public Harvest
-{
-private:
-	std::string _sortOfApple;
-
-public:
-	Apple(std::string harvestName, float weight, std::string color, std::string sortOfApple)
-		: Harvest(harvestName, weight, color), _sortOfApple(sortOfApple) {}
-
-	
-	void PrintHarvest() override
-	{
-		std::cout << "Вид плода: " << GetHarvestName() << "\nВес плода: " << GetWeight() << "\nЦвет плода: " << GetColor() << std::endl;
-		std::cout << "Сорт: " << _sortOfApple << std::endl;
-	}
-
-};
 
 
-class AppleTree : public Plant
-{
-private:
-	std::string _name;
 
-public:
-	AppleTree(std::string plantName, std::string size, int amountHarvest, std::string name)
-		: Plant(plantName, size, amountHarvest),  _name(name) {}
 
-	void PrintPlant()
-	{
-		std::cout << "Вид растения: " << GetPlantName() << "\nРазмер: " << GetSizeOfPlant() << "\nКоличество плодов: " << GetAmountOfHarvest() << std::endl;
-		std::cout << "Название растения: " << _name << std::endl;
-	}
 
-	Harvest* GetHarvest() override
-	{
-		int amount = GetAmountOfHarvest()--;
-		if(amount > 0)
-			return new Apple("яблоко", 0.12, "красный", "антоновка");
-		return nullptr;
-	}
-
-	
-
-};
-
-class PeachTree : public Plant
-{
-private:
-	std::string _name;
-
-public:
-	PeachTree(std::string plantName, std::string size, int amountHarvest, std::string name)
-		: Plant(plantName, size, amountHarvest), _name(name) {}
-
-	void PrintPlant()
-	{
-		std::cout << "Вид растения: " << GetPlantName() << "\nРазмер: " << GetSizeOfPlant() << "\nКоличество плодов: " << GetAmountOfHarvest() << std::endl;
-		std::cout << "Название растения: " << _name << std::endl;
-	}
-
-	Harvest* GetHarvest() override
-	{
-		int amount = GetAmountOfHarvest()--;
-		if (amount > 0)
-			return new Apple("персик", 0.15, "красный", "принц");
-		return nullptr;
-	}
-
-};
-
-class SpruceTree : public Plant
-{
-private:
-	std::string _name;
-
-public:
-	SpruceTree(std::string plantName, std::string size, int amountHarvest, std::string name)
-		: Plant(plantName, size, amountHarvest), _name(name) {}
-
-	void PrintPlant()
-	{
-		std::cout << "Вид растения: " << GetPlantName() << "\nРазмер: " << GetSizeOfPlant() << "\nКоличество плодов: " << GetAmountOfHarvest() << std::endl;
-		std::cout << "Название растения: " << _name << std::endl;
-	}
-
-	Harvest* GetHarvest() override
-	{
-		int amount = GetAmountOfHarvest()--;
-		if (amount > 0)
-			return new Apple("шишка", 0.05, "коричневый", "еловая");
-		return nullptr;
-	}
-
-};
 
 
 int main()
