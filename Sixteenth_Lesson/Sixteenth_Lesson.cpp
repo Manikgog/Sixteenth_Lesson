@@ -3,7 +3,9 @@
 #include <Windows.h>
 #include "Harvest.h"
 #include "Plant.h"
-
+#include "InterfaceClass.h"
+#include <typeinfo>
+#include <type_traits>
 
 class Base 
 {
@@ -109,15 +111,43 @@ class Derived3 : Base3
 	// privateMember недоступен
 };
 
+//---------------------восемнадцатый урок-----------------------------------
+
+class IPrintable
+{
+public:
+	virtual void Print(std::string tmp) const = 0;
+	//IPrintable() = delete;
+	//~IPrintable() = delete;
+};
 
 
+class A : virtual public IPrintable
+{
+public:
 
+	virtual ~A() {}
+	void Print(std::string tmp) const override
+	{
+		std::cout << tmp << "\n";
+	}
+};
 
+class B : public A
+{
+public:
+	~B() override
+	{
+	}
+};
 
+void Bar(const IPrintable& obj)
+{
+	std::string tmp = typeid(obj).name(); std::cout << std::endl;
+	obj.Print(tmp);
+}
 
-
-
-
+//-----------------------------MAIN-----------------------------------------
 
 int main()
 {
@@ -133,7 +163,7 @@ int main()
 	/*Base* obj;
 	obj = new Derived;*/
 
-	AppleTree appleTree("дерево", "средний", 2, "яблоко");
+	/*AppleTree appleTree("дерево", "средний", 2, "яблоко");
 	PeachTree peachTree("дерево", "средний", 3, "персик");
 	SpruceTree firTree("дерево", "большой", 4, "шишка");
 
@@ -157,8 +187,36 @@ int main()
 		h2->PrintHarvest(); std::cout << std::endl;
 		delete h2;
 		h2 = firTree.GetHarvest();
-	}
-	
+	}*/
+	// 18 урок
+
+	A* p_A = new B;
+	A* p2_A = nullptr;
+	A* p3_A = new A;
+
+	A& ref_A = *p_A;
+	A& ref2_A = *p3_A;
+	//A& ref3_A = *p2_A;	//разыменование пустого указателя
+
+	std::string tmp = typeid(*p_A).name();
+	//tmp = typeid(*p2_A).name();
+	tmp = typeid(*p3_A).name();
+
+	tmp = typeid(ref_A).name();
+	tmp = typeid(ref2_A).name();
+
+
+	int a = int();
+	std::cout << a;
+
+	Bar(*p_A);
+	//Bar(*p2_A);
+	Bar(*p3_A);
+	Bar(ref_A);
+	Bar(ref2_A);
+	delete p_A;
+	delete p3_A;
+
 	return 0;
 }
 

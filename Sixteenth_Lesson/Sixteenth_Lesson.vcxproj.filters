@@ -32,5 +32,8 @@
     <ClInclude Include="Fabrica.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
+    <ClInclude Include="InterfaceClass.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

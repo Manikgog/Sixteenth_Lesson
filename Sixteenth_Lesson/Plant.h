@@ -63,10 +63,9 @@ public:
 			return new Apple("€блоко", 0.12, "красный", "антоновка");
 		return nullptr;
 	}
-
-
-
 };
+
+
 
 class PeachTree : public Plant
 {
@@ -119,5 +118,5 @@ public:
 };
 
 
-#endif // !
+#endif 
 

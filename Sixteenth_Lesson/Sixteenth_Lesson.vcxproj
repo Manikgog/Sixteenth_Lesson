@@ -133,6 +133,7 @@
     <ClInclude Include="Fabrica.h" />
     <ClInclude Include="Garden.h" />
     <ClInclude Include="Harvest.h" />
+    <ClInclude Include="InterfaceClass.h" />
     <ClInclude Include="Plant.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

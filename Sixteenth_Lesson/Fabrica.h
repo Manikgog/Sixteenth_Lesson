@@ -11,14 +11,15 @@ public:
 	virtual ~FabricaOfTrees() {}
 };
 
-class Apple : public FabricaOfTrees
-{
-public:
-	std::unique_ptr<Plant> makePlant()
-	{
-		return std::unique_ptr<AppleTree(("дерево"s, "средний"s, 50), "\'Антоновка\'"s)>;
-	}
-};
+//class FabricaOfAppleTrees : public FabricaOfTrees
+//{
+//public:
+//	std::unique_ptr<Plant> makePlant()
+//	{
+//		AppleTree a("дерево"s, "средний"s, 50, "\'Антоновка\'"s);
+//		return std::unique_ptr<>;
+//	}
+//};
 
 
 #endif
